@@ -1,12 +1,8 @@
-import { Injector } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { AppInjector } from './app-injector.helper';
 export class MessageHelper {
-    static messageService: MessageService;
-    constructor(private injector: Injector) {
-        MessageHelper.messageService = this.injector.get(MessageService);
-    }
-
     static success(detail: string, title = 'Success') {
-        this.messageService.add({ severity: 'success', summary:title, detail });
+        const messageService = AppInjector.getService<MessageService>(MessageService);
+        messageService.add({ severity: 'success', summary:title, detail });
     }
-}
+}   

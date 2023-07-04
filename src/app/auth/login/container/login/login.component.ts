@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Form, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +7,16 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  username: string;
-  password: string;
+  loginForm = this.fb.group({
+    username:[''],
+    password:['']
+  })
+  constructor(private fb: FormBuilder){
+
+  }
 
   login() {
     // Perform login logic here
-    console.log(`Username: ${this.username}, Password: ${this.password}`);
+    console.log("login", this.loginForm.value);
   }
 }

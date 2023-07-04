@@ -4,7 +4,6 @@ import { RegisterComponent } from './container/register/register.component';
 import { AuthShareModule } from '../shared/auth-share.module';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
 const routes: Routes = [
   {
     path: '',
@@ -20,7 +19,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     AuthShareModule,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class RegisterModule { }

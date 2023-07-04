@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { AuthService } from 'src/app/auth/shared/services/auth.service';
 import { BASE_URL } from 'src/app/constants/http.constant';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
   registerForm = this.fb.group({
@@ -15,15 +15,16 @@ export class RegisterComponent {
     password: [''],
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
-
-  }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+  ) {}
 
   submitRegisterForm() {
-    const { email, password } = this.registerForm.value;
-    const url = BASE_URL + '/auth/login'
-    console.log('form value', this.registerForm.value)
-    return this.http.post(url, { email, password }).subscribe(ele => console.log('response', ele))
-
+    const { username, email, password } = this.registerForm.value;
+    const url = BASE_URL + '/auth/login';
+    this.authService
+      .register({ username, email, password })
+      .subscribe((res) => {});
   }
 }
